@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-        entityManager.merge(user);
+        entityManager.persist(user);
     }
 
     @Override
@@ -33,6 +33,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUser(int id) {
         entityManager.remove(getUser(id));
+    }
+
+    @Override
+    public User updateUser(User user) {
+        return entityManager.merge(user);
     }
 }
 
