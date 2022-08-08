@@ -1,6 +1,7 @@
 package com.djurayevumid.springboot.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -67,8 +68,20 @@ public class User {
         return salary;
     }
 
-   public void setSalary(int salary) {
+    public void setSalary(int salary) {
         this.salary = salary;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && salary == user.salary && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(department, user.department);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, department, salary);
+    }
 }
